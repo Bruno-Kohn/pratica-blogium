@@ -8,17 +8,8 @@ export default function PostComments({ postId }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    setComments([{
-      id: 1,
-      postId: postId,
-      author: 'João',
-      content: 'Muito bom esse post! Tá de parabéns'
-    }, {
-      id: 2,
-      postId: postId,
-      author: 'Maria',
-      content: 'Como faz pra dar palmas?'
-    }])
+    axios.get(`http://localhost:5000/posts/${postId}/comments`);
+    axios.then(({ infos }) => setComments(infos));
   }, [postId]);
   
   return (
