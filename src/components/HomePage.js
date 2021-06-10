@@ -6,8 +6,8 @@ export default function HomePage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/posts/${postId}/comments`);
-    axios.then(({ infos }) => setPosts(infos));
+    const request = axios.get("http://localhost:5000/posts");
+    request.then((res) => setPosts(res.data));
   }, []);
 
   return <PostList name="Daily stories" posts={posts} />;

@@ -9,8 +9,8 @@ export default function PostComments({ postId }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/posts/${postId}/comments`);
-    axios.then(({ infos }) => setComments(infos));
+    const request = axios.get(`http://localhost:5000/posts/${postId}/comments`);
+    request.then(({ data }) => setComments(data));
   }, [postId]);
 
   return (

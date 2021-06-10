@@ -15,8 +15,8 @@ export default function PostShowPage() {
   const history = useHistory();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/posts/${postId}`);
-    axios.then(({ infos }) => setPost(infos));
+    const request = axios.get(`http://localhost:5000/posts/${postId}`);
+    request.then(({ data }) => setPost(data));
   }, [postId]);
 
   function onEditButtonClick() {

@@ -14,8 +14,8 @@ export default function PostEditPage() {
   const history = useHistory();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/posts/${postId}`);
-    axios.then(({ data }) => {
+    const request = axios.get(`http://localhost:5000/posts/${postId}`);
+    request.then(({ data }) => {
       const post = data;
       setPost(post);
       setTitle(post.title);
@@ -24,7 +24,17 @@ export default function PostEditPage() {
     });
   }, [postId]);
 
-  function onPostSaveButtonClick() {}
+  function onPostSaveButtonClick() {
+    setSaveButtonDisable(true);
+    const body = {
+      coverUrl,
+      title,
+      content,
+    };
+    const request = axios.put(`http://localhost:5000/posts/${postId}`, body);
+    request.then(({ data }) => history.push("/"));
+    request.finally(() => setSaveButtonDisable(false));
+  }
 
   if (!post || !content) return <Spinner />;
 
